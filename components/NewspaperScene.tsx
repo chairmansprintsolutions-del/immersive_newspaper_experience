@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import Newspaper from "./Newspaper";
-import NewspaperContent from "./NewspaperContent";
+import Page from "./Page";
 import ReadingCamera from "./ReadingCamera";
 
 export default function NewspaperScene() {
@@ -13,12 +13,18 @@ export default function NewspaperScene() {
     <>
       <ReadingCamera open={open} />
 
-      <group
-        onClick={() => setOpen((v) => !v)}
-      >
-        <Newspaper />
+      <group>
+        <Newspaper
+          open={open}
+          onToggle={() => setOpen(!open)}
+        />
 
-        {open && <NewspaperContent />}
+        {open && (
+          <>
+            <Page side="left" open={open} />
+            <Page side="right" open={open} />
+          </>
+        )}
       </group>
     </>
   );
