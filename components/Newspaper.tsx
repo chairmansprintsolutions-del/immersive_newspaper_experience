@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function Newspaper() {
-  const [open, setOpen] = useState(false);
+interface Props {
+  open: boolean;
+  onToggle: () => void;
+}
 
+export default function Newspaper({
+  open,
+  onToggle,
+}: Props) {
   return (
     <motion.group
-      onClick={() => setOpen(!open)}
+      onClick={onToggle}
       animate={{
         rotationX: open ? -1.57 : -1.35,
         y: open ? 0.08 : 0.03,
@@ -32,6 +37,7 @@ export default function Newspaper() {
         }}
         transition={{
           duration: 1,
+          ease: "easeInOut",
         }}
       >
         <mesh
