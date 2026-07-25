@@ -2,6 +2,7 @@
 
 import Floor from "./Floor";
 import Table from "./Table";
+import NewspaperScene from "./NewspaperScene";
 
 export default function Experience() {
   return (
@@ -9,6 +10,7 @@ export default function Experience() {
       <ambientLight intensity={1} />
       <Floor />
       <Table />
+      <NewspaperScene />
     </>
   );
 }
