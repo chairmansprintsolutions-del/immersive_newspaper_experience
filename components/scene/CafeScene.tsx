@@ -1,3 +1,4 @@
+cat > components/scene/CafeScene.tsx <<'EOF'
 "use client";
 
 import Model from "../loaders/Model";
@@ -31,3 +32,4 @@ export default function CafeScene() {
     </>
   );
 }
+EOF
