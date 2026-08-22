@@ -11,7 +11,7 @@ export default function Home() {
         shadows
         dpr={[1, 2]}
         camera={{
-          position: [0, 4.8, 5.8],
+          position: [6, 5, 8],
           fov: 45,
           near: 0.1,
           far: 100,
