@@ -1,53 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
 import * as THREE from "three";
 
-interface Props {
-  width?: number;
-  height?: number;
-}
-
-export default function PageMesh({
-  width = 2.8,
-  height = 3.8,
-}: Props) {
-  const geometry = useMemo(() => {
-    const g = new THREE.PlaneGeometry(
-      width,
-      height,
-      80,
-      120
-    );
-
-    const pos = g.attributes.position;
-
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
-
-      // slight natural paper bend
-      const curve = Math.sin((x / width) * Math.PI) * 0.03;
-
-      pos.setZ(i, curve);
-    }
-
-    pos.needsUpdate = true;
-    g.computeVertexNormals();
-
-    return g;
-  }, [width, height]);
-
+export default function PageMesh() {
   return (
     <mesh
-      geometry={geometry}
       rotation={[-Math.PI / 2, 0, 0]}
-      receiveShadow
       castShadow
+      receiveShadow
     >
-      <meshPhysicalMaterial
-        color="#faf7ef"
-        roughness={0.92}
-        clearcoat={0.05}
+      <boxGeometry args={[2.8, 0.018, 3.8]} />
+      <meshStandardMaterial
+        color="#f5f0e6"
+        roughness={0.95}
         side={THREE.DoubleSide}
       />
     </mesh>
