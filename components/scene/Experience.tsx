@@ -4,32 +4,48 @@ import { OrbitControls } from "@react-three/drei";
 
 import Floor from "./Floor";
 import Table from "./Table";
-import Lights from "./Lights";
 import CafeScene from "./CafeScene";
 import NewspaperScene from "../newspaper/NewspaperScene";
 
 export default function Experience() {
   return (
     <>
-      <color attach="background" args={["#f6f2eb"]} />
+      <color attach="background" args={["#f3ede3"]} />
 
-      <Lights />
+      <ambientLight intensity={1.4} />
+
+      <directionalLight
+        castShadow
+        position={[5, 8, 6]}
+        intensity={2.5}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+      />
+
+      <pointLight
+        position={[-3, 5, 2]}
+        intensity={1}
+      />
 
       <Floor />
+
       <Table />
 
       <CafeScene />
 
-      <group position={[0, 0.795, 0]}>
+      {/* Newspaper */}
+      <group position={[0, 0.80, 0]}>
         <NewspaperScene />
       </group>
 
       <OrbitControls
         makeDefault
         enablePan={false}
-        minDistance={3}
-        maxDistance={8}
-        maxPolarAngle={Math.PI / 2.05}
+        target={[0, 1.2, 0]}
+        minDistance={5}
+        maxDistance={11}
+        minPolarAngle={0.55}
+        maxPolarAngle={1.35}
       />
     </>
   );
