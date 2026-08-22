@@ -21,27 +21,25 @@ export default function PageCurl({
     if (!mesh.current) return;
 
     const geometry = mesh.current.geometry as THREE.PlaneGeometry;
-    const pos = geometry.attributes.position;
+    const position = geometry.attributes.position;
 
-    const t = open ? 1 : 0;
+    const target = open ? 1 : 0;
 
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
+    for (let i = 0; i < position.count; i++) {
+      const x = position.getX(i);
 
-      const angle =
-        (x / width) *
-        Math.PI *
-        0.9 *
-        t;
+      if (!open) {
+        position.setZ(i, 0);
+        continue;
+      }
 
-      const z = Math.sin(angle) * 0.55;
-      const y = Math.max(0, Math.sin(angle)) * 0.18;
+      const normalized = (x + width / 2) / width;
+      const angle = normalized * Math.PI * 0.75 * target;
 
-      pos.setZ(i, z);
-      pos.setY(i, y);
+      position.setZ(i, Math.sin(angle) * 0.35);
     }
 
-    pos.needsUpdate = true;
+    position.needsUpdate = true;
     geometry.computeVertexNormals();
   });
 
@@ -49,17 +47,17 @@ export default function PageCurl({
     <mesh
       ref={mesh}
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, 0.025, 0]}
+      position={[0, 0.035, 0]}
       castShadow
       receiveShadow
     >
       <planeGeometry
-        args={[width, height, 120, 160]}
+        args={[width, height, 80, 80]}
       />
 
-      <meshPhysicalMaterial
-        color="#faf7ef"
-        roughness={0.92}
+      <meshStandardMaterial
+        color="#f4efe3"
+        roughness={0.95}
         side={THREE.DoubleSide}
       />
     </mesh>
