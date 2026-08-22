@@ -20,7 +20,7 @@ export default function Experience() {
 
       <CafeScene />
 
-      <group position={[0, 0.79, 0]}>
+      <group position={[0, 0.84, 0]}>
         <NewspaperScene />
       </group>
 
